@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Submitted — Analyzer{% endblock %}
+{% block body_class %}layout-start{% endblock %}
+{% block step_label %}Step 4 · Done{% endblock %}
+{% block current_done %} aria-current="step"{% endblock %}
+
+{% block content %}
+<div class="stack">
+  <h1>Evidence submitted</h1>
+  <p>A mentor will look at three things from this collection.</p>
+  <ul>
+    <li><strong>The code.</strong> The function or script, and what you said it shows.</li>
+    <li><strong>The error.</strong> The command, the traceback, and what you expected.</li>
+    <li><strong>How you debug.</strong> The recording of one bug, in your own words.</li>
+  </ul>
+  <p>This preview did not save anything. The file fields on the earlier pages are visual only.</p>
+</div>
+{% endblock %}
+
+{% block actions %}
+<a class="button button-secondary" href="index.html">Back to start</a>
+<a class="button" href="mentor.html">Open mentor view</a>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Mentor review — Analyzer{% endblock %}
+{% block body_class %}layout-review{% endblock %}
+{% block step_label %}Mentor review{% endblock %}
+{% block progress %}{% endblock %}
+
+{% block content %}
+<div class="lede stack">
+  <h1>Amina Yusuf</h1>
+  <p>Collection date <time datetime="2026-10-27">27 Oct 2026</time>. Read-only sample. The signals are notes for this example, not a score.</p>
+</div>
+<div class="panels">
+  <article class="panel">
+    <h2>Code artifact</h2>
+    <dl class="facts">
+      <div>
+        <dt>Language</dt>
+        <dd>Python</dd>
+      </div>
+      <div>
+        <dt>File</dt>
+        <dd>grade.py</dd>
+      </div>
+      <div>
+        <dt>Note</dt>
+        <dd>parse_score raises ValueError on a bad field. Printing stays in the caller, not in this function.</dd>
+      </div>
+    </dl>
+<pre class="well">def parse_score(line):
+    """Return an int score from a 'name,score' row."""
+    name, raw = line.split(",", 1)
+    raw = raw.strip()
+    if not raw.isdigit():
+        raise ValueError(f"score for {name!r} is not a number: {raw!r}")
+    return int(raw)</pre>
+    <h3>Signals</h3>
+    <ul class="signals">
+      <li>Names the failure mode</li>
+      <li>Splits parsing from printing</li>
+    </ul>
+  </article>
+  <article class="panel">
+    <h2>Error log</h2>
+<pre class="well">$ python3 grade.py scores.csv
+Traceback (most recent call last):
+  File "/home/amina/grade.py", line 24, in &lt;module&gt;
+    total += parse_score(line)
+             ^^^^^^^^^^^^^^^^^
+  File "/home/amina/grade.py", line 11, in parse_score
+    raise ValueError(f"score for {name!r} is not a number: {raw!r}")
+ValueError: score for 'Lee' is not a number: 'n/a'</pre>
+    <p class="attach">Screenshot attached: scores-error.png</p>
+    <h3>Signals</h3>
+    <ul class="signals">
+      <li>Includes the command they ran</li>
+      <li>Quotes the exact exception</li>
+    </ul>
+  </article>
+  <article class="panel">
+    <h2>Recording</h2>
+    <dl class="facts">
+      <div>
+        <dt>Link</dt>
+        <dd><a class="url" href="https://www.loom.com/share/8f2c1a6d0e4b">https://www.loom.com/share/8f2c1a6d0e4b</a></dd>
+      </div>
+      <div>
+        <dt>Duration</dt>
+        <dd>6 min</dd>
+      </div>
+      <div>
+        <dt>Note</dt>
+        <dd>I guessed the score was blank. The exception showed Lee's field was 'n/a'. I kept the check in parse_score, reran the test, and it passed.</dd>
+      </div>
+    </dl>
+    <h3>Signals</h3>
+    <ul class="signals">
+      <li>Narrates the hypothesis</li>
+      <li>Shows the change that made the test pass</li>
+    </ul>
+  </article>
+</div>
+{% endblock %}
+
+{% block actions %}
+<a class="button button-secondary" href="index.html">Back to start</a>
+{% endblock %}

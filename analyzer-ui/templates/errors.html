@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Add error logs — Analyzer{% endblock %}
+{% block body_class %}layout-wide{% endblock %}
+{% block step_label %}Step 2 · Add evidence{% endblock %}
+{% block evidence_href %}errors.html{% endblock %}
+{% block current_evidence %} aria-current="step"{% endblock %}
+
+{% block content %}
+<div class="lede stack">
+  <h1>Add error logs</h1>
+  <p>Paste the output a mentor needs in order to see the failure. Add a screenshot only when the message was on screen.</p>
+</div>
+<div class="split">
+  <div class="fields-col">
+  <form id="errors-form" class="fields" method="get" action="review.html" aria-label="Error logs">
+    <div class="field">
+      <label for="log">Stack trace and test output</label>
+      <textarea id="log" class="mono" name="log" rows="14" spellcheck="false" aria-describedby="log-hint"></textarea>
+      <p id="log-hint" class="hint">Start with the command you ran, then the full traceback or test output.</p>
+    </div>
+    <div class="drop">
+      <label for="screenshot">Screenshot</label>
+      <input id="screenshot" name="screenshot" type="file" accept="image/*" aria-describedby="screenshot-hint">
+      <p id="screenshot-hint" class="hint">Optional. Use this when the error was in a window. This preview does not upload the image.</p>
+    </div>
+  </form>
+  <p class="more">
+    <a href="code.html">Also add a code artifact</a>
+    <a href="recording.html">Also add a recording</a>
+  </p>
+  </div>
+  <aside class="guide">
+    <h2>A useful log</h2>
+    <p>Include the command, the full traceback, and what you expected.</p>
+<pre class="well">$ python3 grade.py scores.csv
+ValueError: score for 'Lee' is not a number: 'n/a'
+
+Expected: name that row and keep reading the file.</pre>
+    <h3>A thin log</h3>
+    <p>A thin log stops at the outcome. For example: "it broke". That names a feeling, not the exception.</p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block actions %}
+<a class="button button-secondary" href="choose.html">Back</a>
+<button class="button" type="submit" form="errors-form">Continue</button>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Add a code artifact — Analyzer{% endblock %}
+{% block body_class %}layout-wide{% endblock %}
+{% block step_label %}Step 2 · Add evidence{% endblock %}
+{% block current_evidence %} aria-current="step"{% endblock %}
+
+{% block content %}
+<div class="lede stack">
+  <h1>Add a code artifact</h1>
+  <p>One function or a small script. Name the language, say what it shows, and paste the code.</p>
+</div>
+<div class="split">
+  <div class="fields-col">
+  <form id="code-form" class="fields" method="get" action="review.html" aria-label="Code artifact">
+    <div class="drop">
+      <label for="code-file">Code file</label>
+      <input id="code-file" name="code_file" type="file" aria-describedby="code-file-hint">
+      <p id="code-file-hint" class="hint">Choose a source file, or paste the function below. This preview does not upload it.</p>
+    </div>
+    <div class="field">
+      <label for="language">Language</label>
+      <input id="language" name="language" type="text" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="shows">What does this show?</label>
+      <textarea id="shows" name="shows" rows="4" aria-describedby="shows-hint"></textarea>
+      <p id="shows-hint" class="hint">One or two sentences a mentor can read before the code.</p>
+    </div>
+    <div class="field">
+      <label for="source">Function or script</label>
+      <textarea id="source" class="mono" name="source" rows="14" spellcheck="false" aria-describedby="source-hint"></textarea>
+      <p id="source-hint" class="hint">Paste one function or a small script, not a whole project.</p>
+    </div>
+  </form>
+  <p class="more">
+    <a href="errors.html">Also add error logs</a>
+    <a href="recording.html">Also add a recording</a>
+  </p>
+  </div>
+  <aside class="guide">
+    <h2>What to include</h2>
+    <p>A small script or one function, with a filename.</p>
+    <p>A mentor should see the decision you made without opening the rest of the project. Example: <code>grade.py</code>, only the <code>parse_score</code> function, which raises when a score is not a number.</p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block actions %}
+<a class="button button-secondary" href="choose.html">Back</a>
+<button class="button" type="submit" form="code-form">Continue</button>
+{% endblock %}

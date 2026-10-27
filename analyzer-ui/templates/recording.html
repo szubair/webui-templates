@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Add a screen recording — Analyzer{% endblock %}
+{% block body_class %}layout-wide{% endblock %}
+{% block step_label %}Step 2 · Add evidence{% endblock %}
+{% block evidence_href %}recording.html{% endblock %}
+{% block current_evidence %} aria-current="step"{% endblock %}
+
+{% block content %}
+<div class="lede stack">
+  <h1>Add a screen recording</h1>
+  <p>Paste a share link. This page has no player. Write down what you talked through.</p>
+</div>
+<div class="split">
+  <div class="fields-col">
+  <form id="recording-form" class="fields" method="get" action="review.html" aria-label="Screen recording">
+    <div class="field">
+      <label for="recording-url">Share link</label>
+      <input id="recording-url" name="recording_url" type="url" inputmode="url" autocomplete="off" placeholder="https://www.loom.com/share/…" aria-describedby="recording-url-hint">
+      <p id="recording-url-hint" class="hint">Loom or any link your mentor can open.</p>
+    </div>
+    <div class="field">
+      <label for="duration">Duration in minutes</label>
+      <input id="duration" name="duration_min" type="number" inputmode="numeric" min="1" max="60" step="1" aria-describedby="duration-hint">
+      <p id="duration-hint" class="hint">Usually 3 to 8.</p>
+    </div>
+    <div class="field">
+      <label for="narration">Talk through the bug: what you tried, what you saw, what you changed.</label>
+      <textarea id="narration" name="narration" rows="6"></textarea>
+    </div>
+  </form>
+  <p class="more">
+    <a href="code.html">Also add a code artifact</a>
+    <a href="errors.html">Also add error logs</a>
+  </p>
+  </div>
+  <aside class="guide">
+    <h2>What to record</h2>
+    <p>A 3–8 minute Loom, or any share link. Talk through one debug: the hypothesis, what you saw, and the change that fixed it.</p>
+    <p>Your mentor needs the link and your note. They do not need a tour of the whole project.</p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block actions %}
+<a class="button button-secondary" href="choose.html">Back</a>
+<button class="button" type="submit" form="recording-form">Continue</button>
+{% endblock %}

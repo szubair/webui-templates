@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Analyzer{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/analyzer.css') }}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="topbar">
+    <div class="bar">
+      <a class="brand" href="index.html">Analyzer</a>
+      <p class="step-label">{% block step_label %}Start{% endblock %}</p>
+    </div>
+  </header>
+  {% block progress %}
+  <nav class="progress" aria-label="Progress">
+    <ol class="rail">
+      <li>
+        <a href="choose.html"{% block current_choose %}{% endblock %}>
+          <span class="rail-index">1</span>
+          <span class="rail-name">Choose</span>
+        </a>
+      </li>
+      <li>
+        <a href="{% block evidence_href %}code.html{% endblock %}"{% block current_evidence %}{% endblock %}>
+          <span class="rail-index">2</span>
+          <span class="rail-name">Add evidence</span>
+        </a>
+      </li>
+      <li>
+        <a href="review.html"{% block current_review %}{% endblock %}>
+          <span class="rail-index">3</span>
+          <span class="rail-name">Review</span>
+        </a>
+      </li>
+      <li>
+        <a href="done.html"{% block current_done %}{% endblock %}>
+          <span class="rail-index">4</span>
+          <span class="rail-name">Done</span>
+        </a>
+      </li>
+    </ol>
+  </nav>
+  {% endblock %}
+  <main id="content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="actions-bar">
+    <div class="actions">
+      {% block actions %}{% endblock %}
+    </div>
+  </footer>
+</body>
+</html>

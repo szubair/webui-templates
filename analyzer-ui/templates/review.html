@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Review evidence — Analyzer{% endblock %}
+{% block body_class %}layout-review{% endblock %}
+{% block step_label %}Step 3 · Review{% endblock %}
+{% block current_review %} aria-current="step"{% endblock %}
+
+{% block content %}
+<form id="review-form" class="stack" method="get" action="done.html" aria-label="Review evidence">
+  <div class="lede stack">
+    <h1>Review your evidence</h1>
+    <p>Sample evidence, for this preview. Edit opens that form. What you type there is not copied here.</p>
+  </div>
+  <div class="panels">
+    <article class="panel">
+      <div class="panel-head">
+        <h2>Code artifact</h2>
+        <a class="edit" href="code.html">Edit</a>
+      </div>
+      <dl class="facts">
+        <div>
+          <dt>Language</dt>
+          <dd>Python</dd>
+        </div>
+        <div>
+          <dt>File</dt>
+          <dd>grade.py</dd>
+        </div>
+        <div>
+          <dt>Note</dt>
+          <dd>parse_score raises ValueError on a bad field. Printing stays in the caller, not in this function.</dd>
+        </div>
+      </dl>
+<pre class="well">def parse_score(line):
+    """Return an int score from a 'name,score' row."""
+    name, raw = line.split(",", 1)
+    raw = raw.strip()
+    if not raw.isdigit():
+        raise ValueError(f"score for {name!r} is not a number: {raw!r}")
+    return int(raw)</pre>
+    </article>
+    <article class="panel">
+      <div class="panel-head">
+        <h2>Error log</h2>
+        <a class="edit" href="errors.html">Edit</a>
+      </div>
+      <p>I ran grade.py on scores.csv and expected it to name Lee's row and keep reading. It stopped on the first bad score.</p>
+<pre class="well">$ python3 grade.py scores.csv
+Traceback (most recent call last):
+  File "/home/amina/grade.py", line 24, in &lt;module&gt;
+    total += parse_score(line)
+             ^^^^^^^^^^^^^^^^^
+  File "/home/amina/grade.py", line 11, in parse_score
+    raise ValueError(f"score for {name!r} is not a number: {raw!r}")
+ValueError: score for 'Lee' is not a number: 'n/a'</pre>
+      <p class="attach">Screenshot attached: scores-error.png</p>
+    </article>
+    <article class="panel">
+      <div class="panel-head">
+        <h2>Recording</h2>
+        <a class="edit" href="recording.html">Edit</a>
+      </div>
+      <dl class="facts">
+        <div>
+          <dt>Link</dt>
+          <dd><a class="url" href="https://www.loom.com/share/8f2c1a6d0e4b">https://www.loom.com/share/8f2c1a6d0e4b</a></dd>
+        </div>
+        <div>
+          <dt>Duration</dt>
+          <dd>6 min</dd>
+        </div>
+        <div>
+          <dt>Note</dt>
+          <dd>I guessed the score was blank. The exception showed Lee's field was 'n/a'. I kept the check in parse_score, reran the test, and it passed.</dd>
+        </div>
+      </dl>
+    </article>
+  </div>
+</form>
+{% endblock %}
+
+{% block actions %}
+<a class="button button-secondary" href="choose.html">Back</a>
+<button class="button" type="submit" form="review-form">Submit evidence</button>
+{% endblock %}

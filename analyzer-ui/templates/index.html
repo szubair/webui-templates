@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Start — Analyzer{% endblock %}
+{% block body_class %}layout-start{% endblock %}
+{% block step_label %}Start{% endblock %}
+
+{% block content %}
+<form id="start-form" class="stack" method="get" action="choose.html" aria-label="Start collection">
+  <h1>Collect evidence from one bug</h1>
+  <p>Plan on about 10 minutes. You will add three kinds of evidence a mentor can read without guessing what happened.</p>
+  <ul>
+    <li><strong>Code artifacts.</strong> A function or small script you wrote.</li>
+    <li><strong>Error logs.</strong> The traceback or test output from the failure.</li>
+    <li><strong>Screen recordings.</strong> A short share link where you talk through the debug.</li>
+  </ul>
+  <p>Add all three, then check the review page before you submit.</p>
+  <p class="quiet"><a href="mentor.html">Mentor preview</a></p>
+</form>
+{% endblock %}
+
+{% block actions %}
+<button class="button" type="submit" form="start-form">Begin</button>
+{% endblock %}

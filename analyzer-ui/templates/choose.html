@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Choose evidence — Analyzer{% endblock %}
+{% block body_class %}layout-wide{% endblock %}
+{% block step_label %}Step 1 · Choose{% endblock %}
+{% block current_choose %} aria-current="step"{% endblock %}
+
+{% block content %}
+<div class="lede stack">
+  <h1>Choose evidence</h1>
+  <p>You can add all three, then review. Start with the one you have ready. Each form links to the other two.</p>
+</div>
+<div class="cards">
+  <a class="card" href="code.html">
+    <h2>Code artifacts</h2>
+    <p>Show one function or a small script you wrote while fixing the bug.</p>
+    <ul>
+      <li>The file, or the pasted function, and the language.</li>
+      <li>A sentence on what the code is meant to show.</li>
+    </ul>
+  </a>
+  <a class="card" href="errors.html">
+    <h2>Error logs</h2>
+    <p>Show the failure as the tool printed it, not as you remember it.</p>
+    <ul>
+      <li>The command you ran and the full traceback or test output.</li>
+      <li>A screenshot only if the error appeared in a window.</li>
+    </ul>
+  </a>
+  <a class="card" href="recording.html">
+    <h2>Screen recordings</h2>
+    <p>Show how you worked through one bug, out loud.</p>
+    <ul>
+      <li>A Loom link, or any share link a mentor can open.</li>
+      <li>How long it runs, and what you tried, saw, and changed.</li>
+    </ul>
+  </a>
+</div>
+{% endblock %}
+
+{% block actions %}
+<a class="button button-secondary" href="index.html">Back</a>
+{% endblock %}

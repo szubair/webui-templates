@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Analyzer{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/web2.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to conversation</a>
+  <header class="topbar">
+    <div class="column">
+      <h1 class="brand"><a href="index.html">Analyzer</a></h1>
+      <p class="quiet">This chat collects code only.</p>
+      <nav aria-label="Views">
+        <a href="index.html">Chat</a>
+        <a href="mentor.html">Mentor view</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="column" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+  {% block composer %}{% endblock %}
+  {% block scripts %}{% endblock %}
+</body>
+</html>

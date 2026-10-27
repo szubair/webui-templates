@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Chat · Analyzer{% endblock %}
+
+{% block content %}
+<ol class="thread" id="thread">
+  <li class="message message-assistant">
+    <p class="who">Analyzer</p>
+    <p>Can you send one function or small script from a bug you just worked, and say what it is meant to show?</p>
+  </li>
+  <li class="message message-learner">
+    <p class="who">Learner</p>
+    <pre class="code"><code>def retry_after(header):&#10;    if header is None:&#10;        return None&#10;    try:&#10;        seconds = int(str(header).strip())&#10;    except ValueError:&#10;        return None&#10;    if seconds &lt; 0:&#10;        return None&#10;    return seconds</code></pre>
+    <p>I wrote it after a non-numeric Retry-After crashed the client.</p>
+  </li>
+  <li class="message message-assistant">
+    <p class="who">Analyzer</p>
+    <p>retry_after takes header, reads seconds from it, and returns that int or None. It returns early when header is None, sets seconds with int() on the stripped text, and returns None on ValueError or when seconds is negative. That keeps a Retry-After value that is not a number from crashing the caller.</p>
+    <p>What would you change if the input were empty?</p>
+  </li>
+</ol>
+{% endblock %}
+
+{% block composer %}
+<form class="composer" method="post" action="index.html" aria-label="Send a function or script">
+  <div class="column">
+    <div class="field">
+      <label for="code">Paste a function or script</label>
+      <textarea id="code" name="code" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="def parse_retry(value):&#10;    return int(value)&#10;&#10;This is meant to show where a non-numeric header crashes."></textarea>
+    </div>
+    <p id="composer-error" class="error" role="alert" hidden></p>
+    <div class="composer-actions">
+      <label for="script-file">Attach a file, optional</label>
+      <input id="script-file" type="file" aria-describedby="file-hint">
+      <p id="file-hint" class="hint">Nothing is uploaded.</p>
+      <button class="send" type="submit">Send</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  (function () {
+    var form = document.querySelector(".composer");
+    var thread = document.getElementById("thread");
+    var field = document.getElementById("code");
+    var fileInput = document.getElementById("script-file");
+    var error = document.getElementById("composer-error");
+    if (!form || !thread || !field || !error) return;
+    thread.setAttribute("aria-live", "polite");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var text = field.value.trim();
+      var file = fileInput && fileInput.files && fileInput.files[0];
+      if (!text && !file) {
+        error.hidden = false;
+        error.textContent = "Paste a function or script, or choose a file, before sending.";
+        field.setAttribute("aria-invalid", "true");
+        field.focus();
+        return;
+      }
+      error.hidden = true;
+      field.removeAttribute("aria-invalid");
+
+      var item = document.createElement("li");
+      item.className = "message message-learner";
+      var who = document.createElement("p");
+      who.className = "who";
+      who.textContent = "Learner";
+      item.appendChild(who);
+      if (text) {
+        var pre = document.createElement("pre");
+        pre.className = "code";
+        var code = document.createElement("code");
+        code.textContent = text;
+        pre.appendChild(code);
+        item.appendChild(pre);
+      }
+      if (file) {
+        var note = document.createElement("p");
+        note.className = "attachment";
+        note.textContent = "Attached file name: " + file.name + ". Not uploaded.";
+        item.appendChild(note);
+      }
+      thread.appendChild(item);
+      form.reset();
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      item.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+      field.focus({ preventScroll: true });
+    });
+  }());
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Mentor view · Analyzer{% endblock %}
+
+{% block content %}
+<ol class="thread" id="thread">
+  <li class="message message-assistant">
+    <p class="who">Analyzer</p>
+    <p>Can you send one function or small script from a bug you just worked, and say what it is meant to show?</p>
+  </li>
+  <li class="message message-learner">
+    <p class="who">Learner</p>
+    <pre class="code"><code>def retry_after(header):&#10;    if header is None:&#10;        return None&#10;    try:&#10;        seconds = int(str(header).strip())&#10;    except ValueError:&#10;        return None&#10;    if seconds &lt; 0:&#10;        return None&#10;    return seconds</code></pre>
+    <p>I wrote it after a non-numeric Retry-After crashed the client.</p>
+  </li>
+  <li class="message message-assistant">
+    <p class="who">Analyzer</p>
+    <p>retry_after takes header, reads seconds from it, and returns that int or None. It returns early when header is None, sets seconds with int() on the stripped text, and returns None on ValueError or when seconds is negative. That keeps a Retry-After value that is not a number from crashing the caller.</p>
+    <p>What would you change if the input were empty?</p>
+  </li>
+</ol>
+<section class="note" aria-labelledby="shows-heading">
+  <h2 id="shows-heading">What this shows</h2>
+  <p>The learner sent one function, retry_after, and one sentence about a crash on a non-numeric Retry-After.</p>
+  <p>The thread names the argument, the early return, and the ValueError path, then leaves the next change as an open question about an empty input.</p>
+  <p><a href="index.html">Back to the chat</a></p>
+</section>
+{% endblock %}

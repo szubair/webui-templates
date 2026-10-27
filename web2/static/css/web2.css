@@ -9,7 +9,7 @@
   --accent: #6e2f28;
   --well: #1b1915;
   --well-text: #f3efe4;
-  --measure: 40rem;
+  --measure: 72rem;
   --gutter: 1.25rem;
   color-scheme: light;
 }
@@ -27,11 +27,9 @@ html {
 
 body {
   margin: 0;
-  height: 100dvh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   background: var(--paper);
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
@@ -80,6 +78,27 @@ a {
   margin-inline: auto;
 }
 
+.shell {
+  width: min(var(--measure), calc(100% - (2 * var(--gutter))));
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation {
+  min-width: 0;
+}
+
+.composer .column {
+  width: 100%;
+}
+
+.side {
+  min-width: 0;
+  padding-block: 1.15rem 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
 .topbar {
   border-bottom: 1px solid var(--rule);
   padding-block: 1.05rem 0.75rem;
@@ -121,9 +140,7 @@ a {
 }
 
 main {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
+  min-width: 0;
   padding-block: 1.15rem 1.25rem;
 }
 
@@ -214,9 +231,7 @@ main:focus-visible {
 }
 
 .note {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--rule);
+  margin: 0;
 }
 
 .note h2 {
@@ -236,9 +251,6 @@ main:focus-visible {
 }
 
 .composer {
-  position: sticky;
-  bottom: 0;
-  z-index: 1;
   flex: 0 0 auto;
   background: var(--paper);
   border-top: 1px solid var(--rule);
@@ -373,7 +385,8 @@ input[type="file"] {
     margin-top: 1.15rem;
   }
 
-  main {
+  main,
+  .side {
     padding-block: 1.5rem 2rem;
   }
 
@@ -408,6 +421,45 @@ input[type="file"] {
   }
 }
 
+@media (min-width: 900px) {
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .shell {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    column-gap: 2rem;
+    align-items: stretch;
+  }
+
+  .conversation {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .conversation main {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .side {
+    min-height: 0;
+    overflow-y: auto;
+    margin-top: 0;
+    border-top: 0;
+    border-left: 1px solid var(--rule);
+    padding-left: 1.5rem;
+  }
+}
+
 @media (max-height: 760px) {
   .topbar {
     padding-block: 1rem 0.85rem;
@@ -425,7 +477,8 @@ input[type="file"] {
     margin-top: 0.7rem;
   }
 
-  main {
+  main,
+  .side {
     padding-block: 1.25rem 1.5rem;
   }
 

@@ -18,10 +18,17 @@
       </nav>
     </div>
   </header>
-  <main id="main" class="column" tabindex="-1">
-    {% block content %}{% endblock %}
-  </main>
-  {% block composer %}{% endblock %}
+  <div class="shell">
+    <div class="conversation">
+      <main id="main" tabindex="-1">
+        {% block content %}{% endblock %}
+      </main>
+      {% block composer %}{% endblock %}
+    </div>
+    <aside class="side">
+      {% block aside %}{% endblock %}
+    </aside>
+  </div>
   {% block scripts %}{% endblock %}
 </body>
 </html>

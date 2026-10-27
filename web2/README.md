@@ -2,6 +2,8 @@
 
 A conversational UI for mentoring programmers. The learner talks with Analyzer and sends code. The thread is a static sample. Nothing calls a model.
 
+On a wide screen the chat is two columns, and on a narrow screen it stacks.
+
 ## What the chat collects
 
 One evidence type: code artifacts. That is a small script, a function, or a feature file the learner wrote. There is no error-log screen, no recording screen, and no chooser among evidence types.

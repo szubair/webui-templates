@@ -15,7 +15,18 @@
       <label for="language">Language</label>
       <input id="language" name="language" type="text" autocomplete="off" spellcheck="false" aria-describedby="language-hint" aria-required="true">
       <p id="language-hint" class="hint">Name the language, such as Python or JavaScript. Spaces alone do not count.</p>
+      <button id="confirm-language" class="button button-secondary button-small" type="button" aria-controls="skill-step">Continue</button>
     </div>
+    <fieldset id="skill-step" class="skill-step" aria-describedby="skill-hint" hidden>
+      <legend id="skill-prompt">What is your skill level?</legend>
+      <p id="skill-hint" class="hint">Choose the option that best describes your current experience.</p>
+      <div class="skill-pills" role="group" aria-labelledby="skill-prompt">
+        <button class="skill-pill" type="button" data-skill="beginner" aria-pressed="false">Beginner</button>
+        <button class="skill-pill" type="button" data-skill="intermediate" aria-pressed="false">Intermediate</button>
+        <button class="skill-pill" type="button" data-skill="expert" aria-pressed="false">Expert</button>
+      </div>
+      <input id="skill-level" name="skill_level" type="hidden" value="">
+    </fieldset>
     <fieldset class="artifact">
       <legend>Code artifact</legend>
       <p id="artifact-hint" class="hint">Paste the code or choose a file. Either one completes this requirement.</p>
@@ -48,15 +59,19 @@
       aria-valuemin="0"
       aria-valuemax="100"
       aria-valuenow="0"
-      aria-valuetext="0 percent. Complete 3 more fields."
+      aria-valuetext="0 percent. Complete 4 more fields."
       style="--pct: 0"
     >
       <span id="completion-pct" class="completion-pct" aria-hidden="true">0%</span>
     </div>
-    <p id="readiness-status" class="readiness-status" role="status" aria-live="polite" aria-atomic="true">Complete 3 more fields.</p>
+    <p id="readiness-status" class="readiness-status" role="status" aria-live="polite" aria-atomic="true">Complete 4 more fields.</p>
     <ul class="checklist" aria-label="Required fields">
       <li data-requirement="language">
         <span class="check-label">Language</span>
+        <span class="check-state">Needed</span>
+      </li>
+      <li data-requirement="skill">
+        <span class="check-label">Skill level</span>
         <span class="check-state">Needed</span>
       </li>
       <li data-requirement="artifact">

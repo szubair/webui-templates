@@ -5,7 +5,7 @@ Static Jinja2 templates, one stylesheet, and one script for a programming-skill 
 ## Active flow
 
 1. `templates/index.html` — Start. One action opens the code form. Quiet link: Mentor preview.
-2. `templates/code.html` — Code artifact. Language, pasted code, optional file, and “What does this code demonstrate?” A readiness panel shows the ring, the percentage, the checklist, and Analyze.
+2. `templates/code.html` — Code artifact. Confirming a language reveals Beginner, Intermediate, and Expert skill-level choices before the learner completes the pasted code or optional file and “What does this code demonstrate?” A readiness panel shows the ring, the percentage, the checklist, and Analyze.
 3. `templates/review.html` — Sample review. Submitted artifact, observed skill signals, strengths, areas to explore, and suggested mentor questions. Edit submission returns to `code.html`.
 
 The form opens `review.html` only at 100%. The review page does not read the query string. It always shows the same sample, and it is labeled as a static prototype rather than model output.
@@ -16,11 +16,12 @@ These files remain in `templates/` and are not linked from the active pages: `ch
 
 ## Completion
 
-Three requirements. The ring uses only `0%`, `33%`, `67%`, and `100%`. Pasted code and a selected file are one requirement, not two slices.
+Four requirements. The ring uses only `0%`, `25%`, `50%`, `75%`, and `100%`. Pasted code and a selected file are one requirement, not two slices.
 
 | Requirement | Counts as complete |
 | --- | --- |
 | Language | Trimmed text is at least 1 character |
+| Skill level | Beginner, Intermediate, or Expert is selected |
 | Code artifact | Pasted code is at least 40 characters after trimming, or any file is selected |
 | Explanation | At least 20 characters after trimming |
 
@@ -82,8 +83,11 @@ Field names on `code-form`:
 | Field | Name | Required for 100% |
 | --- | --- | --- |
 | Language | `language` | Yes |
+| Skill level | `skill_level` | Yes |
 | Pasted code | `source` | Yes, unless a file is selected |
 | File | `code_file` | Optional; satisfies the artifact requirement in this prototype |
 | Explanation | `explanation` | Yes |
 
 Primary buttons on the start page and the code page use the HTML `form` attribute so they can sit outside the form element and still submit it. On the code page, Analyze lives in the readiness panel.
+
+The current static form sends these values as GET query parameters. A real Analyzer route should use POST and construct a payload such as `{ language, skill_level, source, explanation }` (plus the uploaded file when applicable) from the same field names.

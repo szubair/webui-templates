@@ -568,6 +568,55 @@ fieldset.artifact legend {
   padding: 0;
 }
 
+.skill-step {
+  display: grid;
+  gap: 0.65rem;
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.skill-step[hidden] {
+  display: none;
+}
+
+.skill-step legend {
+  padding: 0 0.25rem;
+  font-weight: 600;
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-pill {
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.skill-pill:hover {
+  border-color: var(--accent);
+}
+
+.skill-pill[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
 .readiness {
   display: grid;
   gap: 0.9rem;
@@ -729,6 +778,10 @@ fieldset.artifact legend {
   .completion-ring {
     border: 2px solid CanvasText;
     background: Canvas;
+  }
+
+  .skill-pill[aria-pressed="true"] {
+    border: 2px solid CanvasText;
   }
 
   .button:disabled,

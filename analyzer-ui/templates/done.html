@@ -2,23 +2,22 @@
 
 {% block title %}Submitted — Analyzer{% endblock %}
 {% block body_class %}layout-start{% endblock %}
-{% block step_label %}Step 4 · Done{% endblock %}
-{% block current_done %} aria-current="step"{% endblock %}
+{% block step_label %}Submitted{% endblock %}
 
 {% block content %}
 <div class="stack">
-  <h1>Evidence submitted</h1>
-  <p>A mentor will look at three things from this collection.</p>
+  <h1>Code artifact submitted</h1>
+  <p class="prototype-note" role="note"><strong>Static prototype.</strong> Nothing was saved, and no analysis was run.</p>
+  <p>A mentor for this preview would read one code artifact:</p>
   <ul>
-    <li><strong>The code.</strong> The function or script, and what you said it shows.</li>
-    <li><strong>The error.</strong> The command, the traceback, and what you expected.</li>
-    <li><strong>How you debug.</strong> The recording of one bug, in your own words.</li>
+    <li><strong>Language.</strong> The language named on the form.</li>
+    <li><strong>Artifact.</strong> The pasted code, or the file selected when an upload exists.</li>
+    <li><strong>Explanation.</strong> What the code demonstrates.</li>
   </ul>
-  <p>This preview did not save anything. The file fields on the earlier pages are visual only.</p>
 </div>
 {% endblock %}
 
 {% block actions %}
-<a class="button button-secondary" href="index.html">Back to start</a>
+<a class="button button-secondary" href="review.html">Back to sample review</a>
 <a class="button" href="mentor.html">Open mentor view</a>
 {% endblock %}

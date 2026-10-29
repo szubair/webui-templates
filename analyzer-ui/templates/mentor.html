@@ -6,13 +6,14 @@
 {% block progress %}{% endblock %}
 
 {% block content %}
-<div class="lede stack">
-  <h1>Amina Yusuf</h1>
-  <p>Collection date <time datetime="2026-10-27">27 Oct 2026</time>. Read-only sample. The signals are notes for this example, not a score.</p>
-</div>
-<div class="panels">
+<div class="stack">
+  <div class="lede stack">
+    <h1>Amina Yusuf</h1>
+    <p>Code artifact collected <time datetime="2026-10-27">27 Oct 2026</time>. Read-only sample for a mentor.</p>
+    <p class="prototype-note" role="note"><strong>Static prototype.</strong> These mentor notes are sample copy. They are not a score, and they are not output from a model.</p>
+  </div>
   <article class="panel">
-    <h2>Code artifact</h2>
+    <h2>Submitted artifact</h2>
     <dl class="facts">
       <div>
         <dt>Language</dt>
@@ -23,8 +24,8 @@
         <dd>grade.py</dd>
       </div>
       <div>
-        <dt>Note</dt>
-        <dd>parse_score raises ValueError on a bad field. Printing stays in the caller, not in this function.</dd>
+        <dt>Explanation</dt>
+        <dd>parse_score turns one comma-separated row into an integer score and raises ValueError when the score field is not a number. Printing stays with the caller.</dd>
       </div>
     </dl>
 <pre class="well">def parse_score(line):
@@ -34,54 +35,42 @@
     if not raw.isdigit():
         raise ValueError(f"score for {name!r} is not a number: {raw!r}")
     return int(raw)</pre>
-    <h3>Signals</h3>
+  </article>
+  <article class="panel">
+    <h2>Observed skill signals</h2>
     <ul class="signals">
-      <li>Names the failure mode</li>
-      <li>Splits parsing from printing</li>
+      <li>Names the contract and the rejected input in one small function</li>
+      <li>Keeps printing out of the parser</li>
+      <li>The explanation matches the submitted function</li>
     </ul>
   </article>
   <article class="panel">
-    <h2>Error log</h2>
-<pre class="well">$ python3 grade.py scores.csv
-Traceback (most recent call last):
-  File "/home/amina/grade.py", line 24, in &lt;module&gt;
-    total += parse_score(line)
-             ^^^^^^^^^^^^^^^^^
-  File "/home/amina/grade.py", line 11, in parse_score
-    raise ValueError(f"score for {name!r} is not a number: {raw!r}")
-ValueError: score for 'Lee' is not a number: 'n/a'</pre>
-    <p class="attach">Screenshot attached: scores-error.png</p>
-    <h3>Signals</h3>
-    <ul class="signals">
-      <li>Includes the command they ran</li>
-      <li>Quotes the exact exception</li>
+    <h2>Strengths</h2>
+    <ul>
+      <li>Worth acknowledging the explicit failure path and the returned integer</li>
+      <li>The docstring gives you a check against the explanation</li>
     </ul>
   </article>
   <article class="panel">
-    <h2>Recording</h2>
-    <dl class="facts">
-      <div>
-        <dt>Link</dt>
-        <dd><a class="url" href="https://www.loom.com/share/8f2c1a6d0e4b">https://www.loom.com/share/8f2c1a6d0e4b</a></dd>
-      </div>
-      <div>
-        <dt>Duration</dt>
-        <dd>6 min</dd>
-      </div>
-      <div>
-        <dt>Note</dt>
-        <dd>I guessed the score was blank. The exception showed Lee's field was 'n/a'. I kept the check in parse_score, reran the test, and it passed.</dd>
-      </div>
-    </dl>
-    <h3>Signals</h3>
-    <ul class="signals">
-      <li>Narrates the hypothesis</li>
-      <li>Shows the change that made the test pass</li>
+    <h2>Areas to explore</h2>
+    <ul>
+      <li>Rows with no comma</li>
+      <li>Whether the caller should continue after the first rejected row</li>
+      <li>Scores with leading zeros or a decimal point</li>
     </ul>
+  </article>
+  <article class="panel">
+    <h2>Suggested mentor questions</h2>
+    <ol>
+      <li>Why raise here instead of returning a default the caller could ignore?</li>
+      <li>If the file has more rows after a bad one, what should the caller do?</li>
+      <li>What would you want a test to lock in first?</li>
+    </ol>
   </article>
 </div>
 {% endblock %}
 
 {% block actions %}
 <a class="button button-secondary" href="index.html">Back to start</a>
+<a class="button" href="review.html">Learner sample review</a>
 {% endblock %}

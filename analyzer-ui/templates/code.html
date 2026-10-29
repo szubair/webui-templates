@@ -1,52 +1,81 @@
 {% extends "base.html" %}
 
-{% block title %}Add a code artifact — Analyzer{% endblock %}
-{% block body_class %}layout-wide{% endblock %}
-{% block step_label %}Step 2 · Add evidence{% endblock %}
-{% block current_evidence %} aria-current="step"{% endblock %}
+{% block title %}Code artifact — Analyzer{% endblock %}
+{% block body_class %}layout-code{% endblock %}
+{% block step_label %}Code artifact{% endblock %}
 
 {% block content %}
 <div class="lede stack">
   <h1>Add a code artifact</h1>
-  <p>One function or a small script. Name the language, say what it shows, and paste the code.</p>
+  <p>One function or a small script. Complete the language, the code, and a short explanation. The next page is a static sample review.</p>
 </div>
 <div class="split">
-  <div class="fields-col">
-  <form id="code-form" class="fields" method="get" action="review.html" aria-label="Code artifact">
-    <div class="drop">
-      <label for="code-file">Code file</label>
-      <input id="code-file" name="code_file" type="file" aria-describedby="code-file-hint">
-      <p id="code-file-hint" class="hint">Choose a source file, or paste the function below. This preview does not upload it.</p>
-    </div>
+  <form id="code-form" class="fields" method="get" action="review.html" aria-label="Code artifact" data-language-min="1" data-code-min="40" data-explanation-min="20">
     <div class="field">
       <label for="language">Language</label>
-      <input id="language" name="language" type="text" autocomplete="off" spellcheck="false">
+      <input id="language" name="language" type="text" autocomplete="off" spellcheck="false" aria-describedby="language-hint" aria-required="true">
+      <p id="language-hint" class="hint">Name the language, such as Python or JavaScript. Spaces alone do not count.</p>
     </div>
+    <fieldset class="artifact">
+      <legend>Code artifact</legend>
+      <p id="artifact-hint" class="hint">Paste the code or choose a file. Either one completes this requirement.</p>
+      <div class="field">
+        <label for="source">Pasted code</label>
+        <textarea id="source" class="mono" name="source" rows="14" spellcheck="false" aria-describedby="source-hint"></textarea>
+        <p id="source-hint" class="hint">At least 40 characters. A short function is enough. Spaces and blank lines alone do not count. You can leave this empty when a file is selected.</p>
+      </div>
+      <div class="field">
+        <label for="code-file">File <span class="optional">(optional)</span></label>
+        <input id="code-file" name="code_file" type="file" aria-describedby="code-file-hint code-file-picked">
+        <p id="code-file-hint" class="hint">Any selected file completes the code artifact in this prototype. Nothing is uploaded.</p>
+        <p id="code-file-picked" class="hint" hidden></p>
+        <button id="clear-file" class="button button-secondary button-small" type="button" hidden>Remove file</button>
+      </div>
+    </fieldset>
     <div class="field">
-      <label for="shows">What does this show?</label>
-      <textarea id="shows" name="shows" rows="4" aria-describedby="shows-hint"></textarea>
-      <p id="shows-hint" class="hint">One or two sentences a mentor can read before the code.</p>
-    </div>
-    <div class="field">
-      <label for="source">Function or script</label>
-      <textarea id="source" class="mono" name="source" rows="14" spellcheck="false" aria-describedby="source-hint"></textarea>
-      <p id="source-hint" class="hint">Paste one function or a small script, not a whole project.</p>
+      <label for="explanation">What does this code demonstrate?</label>
+      <textarea id="explanation" name="explanation" rows="4" aria-describedby="explanation-hint" aria-required="true"></textarea>
+      <p id="explanation-hint" class="hint">At least 20 characters, so a mentor knows what to look for. Spaces alone do not count.</p>
     </div>
   </form>
-  <p class="more">
-    <a href="errors.html">Also add error logs</a>
-    <a href="recording.html">Also add a recording</a>
-  </p>
-  </div>
-  <aside class="guide">
-    <h2>What to include</h2>
-    <p>A small script or one function, with a filename.</p>
-    <p>A mentor should see the decision you made without opening the rest of the project. Example: <code>grade.py</code>, only the <code>parse_score</code> function, which raises when a score is not a number.</p>
+  <aside class="readiness" aria-labelledby="readiness-title">
+    <h2 id="readiness-title">Completion</h2>
+    <div
+      id="completion-ring"
+      class="completion-ring"
+      role="meter"
+      aria-labelledby="readiness-title"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      aria-valuetext="0 percent. Complete 3 more fields."
+      style="--pct: 0"
+    >
+      <span id="completion-pct" class="completion-pct" aria-hidden="true">0%</span>
+    </div>
+    <p id="readiness-status" class="readiness-status" role="status" aria-live="polite" aria-atomic="true">Complete 3 more fields.</p>
+    <ul class="checklist" aria-label="Required fields">
+      <li data-requirement="language">
+        <span class="check-label">Language</span>
+        <span class="check-state">Needed</span>
+      </li>
+      <li data-requirement="artifact">
+        <span class="check-label">Code artifact</span>
+        <span class="check-state">Needed</span>
+      </li>
+      <li data-requirement="explanation">
+        <span class="check-label">Explanation</span>
+        <span class="check-state">Needed</span>
+      </li>
+    </ul>
+    <button id="analyze-code" class="button" type="submit" form="code-form" disabled aria-disabled="true" aria-describedby="readiness-status">Analyze code artifact</button>
+    <noscript>
+      <p class="hint">This preview uses a script to update completion and enable analysis. With scripts off, analysis stays unavailable.</p>
+    </noscript>
   </aside>
 </div>
 {% endblock %}
 
 {% block actions %}
-<a class="button button-secondary" href="choose.html">Back</a>
-<button class="button" type="submit" form="code-form">Continue</button>
+<a class="button button-secondary" href="index.html">Back</a>
 {% endblock %}

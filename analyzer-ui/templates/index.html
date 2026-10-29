@@ -5,15 +5,15 @@
 {% block step_label %}Start{% endblock %}
 
 {% block content %}
-<form id="start-form" class="stack" method="get" action="choose.html" aria-label="Start collection">
-  <h1>Collect evidence from one bug</h1>
-  <p>Plan on about 10 minutes. You will add three kinds of evidence a mentor can read without guessing what happened.</p>
+<form id="start-form" class="stack" method="get" action="code.html" aria-label="Open the code artifact form">
+  <h1>Analyze a code artifact</h1>
+  <p>Share one function or a small script. Name the language, add the code, and say what it demonstrates.</p>
   <ul>
-    <li><strong>Code artifacts.</strong> A function or small script you wrote.</li>
-    <li><strong>Error logs.</strong> The traceback or test output from the failure.</li>
-    <li><strong>Screen recordings.</strong> A short share link where you talk through the debug.</li>
+    <li><strong>Language.</strong> The language the code is written in.</li>
+    <li><strong>The artifact.</strong> Paste the code or choose a file. One of those is enough.</li>
+    <li><strong>Explanation.</strong> What the code demonstrates.</li>
   </ul>
-  <p>Add all three, then check the review page before you submit.</p>
+  <p>When those three are complete, continue to a sample review. This preview does not save the code or run an analysis.</p>
   <p class="quiet"><a href="mentor.html">Mentor preview</a></p>
 </form>
 {% endblock %}

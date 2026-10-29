@@ -1,4 +1,4 @@
-/* Analyzer evidence collection. One ink, one accent, warm paper. */
+/* Analyzer code artifact. One ink, one accent, warm paper. */
 
 :root {
   --bg: #f3eee6;
@@ -32,6 +32,10 @@ body {
 
 body.layout-wide {
   --measure: 68rem;
+}
+
+body.layout-code {
+  --measure: 74rem;
 }
 
 body.layout-review {
@@ -282,6 +286,7 @@ label {
 .attach {
   margin: 0;
   font-size: 0.9375rem;
+  overflow-wrap: anywhere;
 }
 
 input[type="text"],
@@ -514,6 +519,28 @@ code {
   border-color: var(--ink);
 }
 
+.button-small {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9375rem;
+  justify-self: start;
+}
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--ink);
+  cursor: not-allowed;
+}
+
+.button:disabled:hover,
+.button[aria-disabled="true"]:hover {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -521,6 +548,125 @@ code {
 
 .button:focus-visible {
   outline-color: var(--ink);
+}
+
+.optional {
+  font-weight: 400;
+}
+
+fieldset.artifact {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 1.15rem;
+  min-width: 0;
+}
+
+fieldset.artifact legend {
+  font-weight: 600;
+  padding: 0;
+}
+
+.readiness {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+  padding: 1.1rem 1.15rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.completion-ring {
+  --pct: 0;
+  width: 8rem;
+  height: 8rem;
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side, var(--surface) 68%, transparent 70%),
+    conic-gradient(from -90deg, var(--accent) calc(var(--pct) * 1%), var(--line) 0);
+}
+
+.completion-pct {
+  font-size: 1.35rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.readiness-status {
+  margin: 0;
+  font-weight: 600;
+}
+
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+
+.checklist li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.check-label,
+.check-state {
+  font-weight: 600;
+}
+
+.check-state {
+  font-size: 0.875rem;
+}
+
+.check-state::before {
+  content: "○ ";
+  font-weight: 400;
+}
+
+.checklist li.is-done .check-state::before {
+  content: "✓ ";
+}
+
+.readiness .button {
+  width: 100%;
+}
+
+.prototype-note {
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.panel ul,
+.panel ol {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.panel li + li {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 799px) {
+  .layout-code .split {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-code .readiness {
+    order: 2;
+  }
 }
 
 @media (min-width: 800px) {
@@ -543,6 +689,17 @@ code {
     padding-left: 1.75rem;
     border-left: 1px solid var(--line);
   }
+
+  .layout-code .split {
+    grid-template-columns: minmax(0, 1.75fr) minmax(17rem, 22rem);
+    column-gap: 2rem;
+    align-items: start;
+  }
+
+  .layout-code .readiness {
+    position: sticky;
+    top: 1.25rem;
+  }
 }
 
 @media (max-width: 479px) {
@@ -556,6 +713,29 @@ code {
   .cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .completion-ring,
+  .button,
+  .checklist li {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .completion-ring {
+    border: 2px solid CanvasText;
+    background: Canvas;
+  }
+
+  .button:disabled,
+  .button[aria-disabled="true"] {
+    border: 2px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
   }
 }
 
